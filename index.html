@@ -2,118 +2,78 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clínica Dental MARSER</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0; padding: 0;
-            background-color: #ffffff;
-            color: #202124;
-        }
-        header {
-            background-color: #1A73E8;
-            color: white;
-            padding: 1em;
-            text-align: center;
-        }
-        .hero {
-            text-align: center;
-            padding: 2em;
-            background-color: #F1F3F4;
-        }
-        .hero h1 {
-            color: #1A73E8;
-        }
-        .hero p {
-            font-size: 1.2em;
-        }
-        .hero button {
-            background-color: #00C896;
-            color: white;
-            border: none;
-            padding: 1em 2em;
-            font-size: 1em;
-            cursor: pointer;
-            border-radius: 10px;
-        }
-        section {
-            padding: 2em;
-        }
-        .services {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1em;
-            justify-content: center;
-        }
-        .service {
-            background: #F1F3F4;
-            padding: 1em;
-            border-radius: 10px;
-            width: 200px;
-            text-align: center;
-        }
-        footer {
-            text-align: center;
-            background-color: #1A73E8;
-            color: white;
-            padding: 1em;
-        }
-        .chat-widget {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #00C896;
-            color: white;
-            padding: 1em;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clínica Dental MARSER</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+      color: #202124;
+    }
+    header {
+      background-color: #1A73E8;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    .content {
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      border-radius: 8px;
+    }
+    h2 {
+      color: #1A73E8;
+    }
+    ul {
+      line-height: 1.6;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9em;
+      color: #555;
+    }
+  </style>
 </head>
 <body>
 
-<header>
+  <header>
     <h1>Clínica Dental MARSER</h1>
     <p>Tu sonrisa, nuestra prioridad</p>
-</header>
+  </header>
 
-<div class="hero">
-    <h1>¡Agenda tu cita fácilmente!</h1>
-    <p>Haz clic abajo para hablar con nuestra asistente virtual</p>
-    </button>
-</div>
+  <section class="content">
+    <h2>🦷 Tips dentales para tu salud bucal</h2>
+    <ul>
+      <li>✅ Cepíllate al menos 2 veces al día.</li>
+      <li>✅ Usa hilo dental diariamente.</li>
+      <li>✅ Cambia tu cepillo cada 3 meses.</li>
+      <li>✅ Visita al dentista cada 6 meses.</li>
+      <li>✅ Evita el exceso de azúcar y alimentos pegajosos.</li>
+    </ul>
+  </section>
 
-<section>
-    <h2 style="text-align:center;">Nuestros Servicios</h2>
-    <div class="services">
-        <div class="service"><strong>Limpieza Dental</strong></div>
-        <div class="service"><strong>Ortodoncia</strong></div>
-        <div class="service"><strong>Implantes</strong></div>
-        <div class="service"><strong>Urgencias</strong></div>
-    </div>
-</section>
+  <footer>
+    © 2025 Clínica Dental MARSER. Todos los derechos reservados.
+  </footer>
 
-<footer>
-    <p>Contacto: contacto@marser.com | Dirección: Av. Central 123, Ciudad</p>
-</footer>
+  <!-- CHAT DE N8N -->
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
-<div class="chat-widget" onclick="openAgent()">💬</div>
-
-<script>
-    function openAgent() {
-        window.open("https://tu-n8n-agent-url.com", "_blank");
-    }
-</script>
-<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
-<script type="module">
-	import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
-
-	createChat({
-		webhookUrl: 'YOUR_PRODUCTION_WEBHOOK_URL'
-	});
-</script>
+    createChat({
+      webhookUrl: 'https://tu-webhook-de-n8n/chat/clinica-marser' // REEMPLAZA AQUÍ CON TU URL
+    });
+  </script>
 </body>
 </html>
