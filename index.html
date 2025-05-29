@@ -83,7 +83,14 @@
 <div class="hero">
     <h1>¡Agenda tu cita fácilmente!</h1>
     <p>Haz clic abajo para hablar con nuestra asistente virtual</p>
-    <button onclick="openAgent()">Hablar con la asistente</button>
+    <button onclick="openAgent()"><link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+<script type="module">
+	import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+	createChat({
+		webhookUrl: 'YOUR_PRODUCTION_WEBHOOK_URL'
+	});
+</script></button>
 </div>
 
 <section>
