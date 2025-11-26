@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marser Automatiza | Ecosistema de Gestión Inteligente</title>
+    
+    <!-- ICONO DE LA PESTAÑA (FAVICON) -->
+    <!-- He puesto un robot azul tecnológico. Si quieres poner tu logo propio:
+         1. Guarda tu imagen en la misma carpeta.
+         2. Cambia el enlace de abajo por el nombre de tu archivo (ej: href="logo.png") -->
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/4712/4712109.png">
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Font Awesome para iconos -->
@@ -70,6 +77,16 @@
             background-color: var(--accent-hover);
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(0, 212, 255, 0.1);
         }
 
         section {
@@ -157,6 +174,7 @@
             overflow: hidden;
         }
 
+        /* Elementos decorativos de fondo */
         .bg-circle {
             position: absolute;
             border-radius: 50%;
@@ -185,6 +203,7 @@
             display: inline-block;
         }
         
+        /* Subrayado animado */
         .hero h1 span::after {
             content: '';
             position: absolute;
@@ -368,22 +387,24 @@
         .ceo-image {
             flex: 1;
             position: relative;
+            /* Centramos la imagen para el nuevo diseño */
             display: flex;
             justify-content: center;
         }
 
-        /* DISEÑO CIRCULAR */
+        /* DISEÑO ACTUALIZADO: PERFIL CIRCULAR MODERNO */
         .ceo-image img {
             width: 320px;
             height: 320px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid var(--accent);
-            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.25);
+            border-radius: 50%; /* Crea el círculo perfecto */
+            object-fit: cover;  /* Asegura que la cara se vea bien centrada */
+            border: 5px solid var(--accent); /* Borde tecnológico */
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.25); /* Sombra luminosa */
             transition: all 0.3s ease;
-            background-color: var(--primary);
+            background-color: var(--primary); /* Fondo de seguridad */
         }
 
+        /* Efecto al pasar el mouse */
         .ceo-image img:hover {
             transform: scale(1.05);
             box-shadow: 0 20px 45px rgba(0, 212, 255, 0.4);
@@ -394,7 +415,7 @@
             position: absolute;
             bottom: 10px;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%); /* Centrado perfectamente abajo */
             background: var(--white);
             padding: 12px 30px;
             border-radius: 50px;
@@ -436,7 +457,7 @@
         }
 
         .ceo-role {
-            color: var(--accent);
+            color: var(--accent); /* Cambiado a Accent para resaltar */
             font-weight: 600;
             font-size: 0.9rem;
             text-transform: uppercase;
@@ -454,17 +475,17 @@
         .cta-section h2 { font-size: 2.8rem; margin-bottom: 20px; }
         .cta-section p { font-size: 1.2rem; margin-bottom: 40px; opacity: 0.9; }
 
-        /* --- MODAL DE AGENDAMIENTO --- */
+        /* --- MODAL DE AGENDAMIENTO (NUEVO ESTILO) --- */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 37, 64, 0.85);
+            background: rgba(10, 37, 64, 0.85); /* Fondo oscuro azulado */
             backdrop-filter: blur(5px);
             z-index: 2000;
-            display: none;
+            display: none; /* Oculto por defecto */
             align-items: center;
             justify-content: center;
             opacity: 0;
@@ -480,7 +501,7 @@
             background: white;
             width: 90%;
             max-width: 900px;
-            height: 80vh;
+            height: 80vh; /* Alto del modal */
             border-radius: 20px;
             box-shadow: 0 25px 50px rgba(0,0,0,0.5);
             position: relative;
@@ -525,6 +546,18 @@
             flex: 1;
             width: 100%;
             height: 100%;
+            /* Aquí es donde se carga el iframe */
+        }
+        
+        .calendar-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            background: #fff;
         }
 
         /* --- FOOTER --- */
@@ -566,7 +599,7 @@
             .ceo-wrapper { flex-direction: column; text-align: center; }
             .ceo-badge { right: 50%; transform: translateX(50%); bottom: -20px; }
             .quote-icon { margin: 0 auto 20px; display: block; }
-            .nav-links { display: none; }
+            .nav-links { display: none; } /* En móvil ocultamos links para simplificar */
         }
 
         @media (max-width: 480px) {
@@ -593,6 +626,7 @@
                     <a href="#solucion">Ecosistema</a>
                     <a href="#ceo">Sobre Nosotros</a>
                 </div>
+                <!-- BOTÓN HEADER: Agregada clase 'js-open-calendar' y href="#" -->
                 <a href="#" class="btn btn-primary cta-header js-open-calendar">Agendar Llamada</a>
             </nav>
         </div>
@@ -606,6 +640,7 @@
             <h1>Tu Clínica Dental Pierde Pacientes Mientras Duermes <br><span>(Y Tenemos la Solución)</span></h1>
             <!-- TEXTO ACTUALIZADO: Refleja el Ecosistema -->
             <p>Implementamos un Ecosistema de Gestión Inteligente que conecta WhatsApp, Email y Google Sheets. Desde la captación del paciente hasta el reporte que recibes cada mañana.</p>
+            <!-- BOTÓN HERO: Agregada clase 'js-open-calendar' y href="#" -->
             <a href="#" class="btn btn-primary btn-large js-open-calendar">Agendar Llamada <i class="fa-solid fa-arrow-right" style="margin-left: 10px;"></i></a>
             
             <div class="hero-stats">
@@ -738,7 +773,9 @@
         <div class="container">
             <div class="ceo-wrapper">
                 <div class="ceo-image">
-                    <!-- IMAGEN CON DISEÑO CIRCULAR -->
+                    <!-- 
+                        IMAGEN ACTUALIZADA CON DISEÑO CIRCULAR
+                    -->
                     <img src="https://i.ibb.co/60nBxh4Y/88de8eb1-1133-4199-a949-12724d0b25d7.jpg" alt="Sergio M Bompart CEO">
                     
                     <div class="ceo-badge">
@@ -768,6 +805,7 @@
         <div class="container">
             <h2>¿Listo para modernizar tu clínica?</h2>
             <p>Deja de perder pacientes por no responder a tiempo. Agenda una auditoría gratuita y mira cómo funciona el ecosistema en tiempo real.</p>
+            <!-- BOTÓN CTA FINAL: Agregada clase 'js-open-calendar' -->
             <button class="btn btn-primary btn-large js-open-calendar" style="background: var(--white); color: var(--primary);">
                 Agendar Llamada
             </button>
@@ -798,7 +836,10 @@
                 <button class="close-modal" id="closeModal">&times;</button>
             </div>
             <div class="calendar-container">
-                <!-- CALENDARIO INTEGRADO -->
+                <!-- 
+                    CALENDARIO INTEGRADO
+                    Enlace configurado: https://calendly.com/sergiomarcano01/30min
+                -->
                 <iframe 
                     src="https://calendly.com/sergiomarcano01/30min" 
                     width="100%" 
@@ -819,15 +860,15 @@
 
         // Función para abrir modal
         function openModal(e) {
-            e.preventDefault(); 
+            e.preventDefault(); // Evita que el enlace salte
             modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; 
+            document.body.style.overflow = 'hidden'; // Evita scroll de fondo
         }
 
         // Función para cerrar modal
         function closeModal() {
             modal.classList.remove('active');
-            document.body.style.overflow = 'auto'; 
+            document.body.style.overflow = 'auto'; // Reactiva scroll
         }
 
         // Asignar evento a TODOS los botones de agendar
@@ -838,7 +879,7 @@
         // Cerrar con la X
         closeButton.addEventListener('click', closeModal);
 
-        // Cerrar haciendo click fuera
+        // Cerrar haciendo click fuera del contenido (en el fondo oscuro)
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 closeModal();
@@ -848,6 +889,7 @@
         // Smooth Scroll para otros enlaces
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
+                // Solo si NO es un botón de calendario
                 if (!this.classList.contains('js-open-calendar')) {
                     e.preventDefault();
                     document.querySelector(this.getAttribute('href')).scrollIntoView({
