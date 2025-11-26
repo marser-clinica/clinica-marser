@@ -1,79 +1,348 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Clínica Dental MARSER</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background-color: #f4f4f4;
-      color: #202124;
-    }
-    header {
-      background-color: #1A73E8;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    h1 {
-      margin: 0;
-      font-size: 2rem;
-    }
-    .content {
-      padding: 20px;
-      max-width: 800px;
-      margin: auto;
-      background-color: #fff;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-      border-radius: 8px;
-    }
-    h2 {
-      color: #1A73E8;
-    }
-    ul {
-      line-height: 1.6;
-    }
-    footer {
-      text-align: center;
-      padding: 15px;
-      font-size: 0.9em;
-      color: #555;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odontología Especializada | Clínica Santa Sofía Maturín</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dental-blue': '#40E0D0', // Turquesa suave
+                        'dental-purple': '#A78BFA', // Lila
+                        'dental-dark': '#1e293b',
+                        'soft-gradient-start': '#e0f2fe',
+                        'soft-gradient-end': '#f3e8ff',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .hero-pattern {
+            background-color: #ffffff;
+            opacity: 0.8;
+            background-image:  linear-gradient(#f0f9ff 2px, transparent 2px), linear-gradient(90deg, #f0f9ff 2px, transparent 2px);
+            background-size: 40px 40px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .service-img {
+            transition: transform 0.3s ease;
+        }
+        .service-card:hover .service-img {
+            transform: scale(1.05);
+        }
+    </style>
 </head>
-<body>
+<body class="font-sans text-gray-700 bg-gray-50">
 
-  <header>
-    <h1>Clínica Dental MARSER</h1>
-    <p>Tu sonrisa, nuestra prioridad</p>
-  </header>
+    <!-- Navbar -->
+    <nav class="bg-white/90 backdrop-blur-md fixed w-full z-50 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <div class="bg-gradient-to-tr from-dental-blue to-dental-purple p-2 rounded-full text-white">
+                        <i class="fas fa-tooth text-2xl"></i>
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-gray-800">Dra. Odontología</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#inicio" class="text-gray-600 hover:text-dental-purple transition font-medium">Inicio</a>
+                    <a href="#servicios" class="text-gray-600 hover:text-dental-purple transition font-medium">Servicios</a>
+                    <a href="#ubicacion" class="text-gray-600 hover:text-dental-purple transition font-medium">Ubicación</a>
+                    <a href="https://wa.me/584128020652" target="_blank" class="bg-gradient-to-r from-dental-blue to-dental-purple text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition duration-200 flex items-center gap-2">
+                        <i class="fab fa-whatsapp"></i> Agendar Cita
+                    </a>
+                </div>
 
-  <section class="content">
-    <h2>🦷 Tips dentales para tu salud bucal</h2>
-    <ul>
-      <li>✅ Cepíllate al menos 2 veces al día.</li>
-      <li>✅ Usa hilo dental diariamente.</li>
-      <li>✅ Cambia tu cepillo cada 3 meses.</li>
-      <li>✅ Visita al dentista cada 6 meses.</li>
-      <li>✅ Evita el exceso de azúcar y alimentos pegajosos.</li>
-    </ul>
-  </section>
+                <!-- Mobile Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-dental-purple focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
 
-  <footer>
-    © 2025 Clínica Dental MARSER. Todos los derechos reservados.
-  </footer>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t p-4 absolute w-full shadow-lg">
+            <div class="flex flex-col space-y-4">
+                <a href="#inicio" class="text-gray-700 hover:text-dental-purple font-medium" onclick="toggleMenu()">Inicio</a>
+                <a href="#servicios" class="text-gray-700 hover:text-dental-purple font-medium" onclick="toggleMenu()">Servicios</a>
+                <a href="#ubicacion" class="text-gray-700 hover:text-dental-purple font-medium" onclick="toggleMenu()">Ubicación</a>
+                <a href="https://wa.me/584128020652" class="text-dental-purple font-bold">Agendar por WhatsApp</a>
+            </div>
+        </div>
+    </nav>
 
-  <!-- CHAT DE N8N -->
-  <script type="module">
-    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+    <!-- Hero Section -->
+    <section id="inicio" class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden bg-gradient-to-br from-soft-gradient-start via-white to-soft-gradient-end">
+        <div class="absolute inset-0 hero-pattern z-0"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-left animate-fade-in-up">
+                    <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-600 text-sm font-semibold mb-4">
+                        <i class="fas fa-map-marker-alt mr-1"></i> Maturín, Clínica Santa Sofía
+                    </span>
+                    <h1 class="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+                        Tu sonrisa es nuestra <span class="text-transparent bg-clip-text bg-gradient-to-r from-dental-blue to-dental-purple">mejor carta de presentación</span>
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-8 max-w-lg mx-auto lg:mx-0">
+                        Atención odontológica integral, estética y humana. Desde el cuidado de los más pequeños hasta transformaciones de sonrisas completas.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="https://wa.me/584128020652" target="_blank" class="bg-gray-900 text-white px-8 py-3 rounded-full font-semibold hover:bg-gray-800 transition flex items-center justify-center gap-2 shadow-lg">
+                            <i class="far fa-calendar-check"></i> Reservar Cita
+                        </a>
+                        <a href="#servicios" class="bg-white text-gray-700 border border-gray-200 px-8 py-3 rounded-full font-semibold hover:bg-gray-50 transition flex items-center justify-center gap-2">
+                            Ver Tratamientos
+                        </a>
+                    </div>
+                </div>
+                <div class="relative mx-auto lg:ml-auto">
+                    <!-- Decorative blobs -->
+                    <div class="absolute -top-10 -right-10 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+                    <div class="absolute -bottom-10 -left-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+                    
+                    <!-- Main Image Placeholder (Representing the Doctor) -->
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white transform rotate-2 hover:rotate-0 transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Dra. Odontóloga Sonriendo" class="w-full h-auto object-cover max-h-[500px]">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6 text-white">
+                            <p class="font-bold text-lg">Dra. Especialista</p>
+                            <p class="text-sm opacity-90">Cuidando tu salud bucal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    createChat({
-      webhookUrl: https:https://hsyye.app.n8n.cloud/webhook-test/21531f35-2a63-4652-85a7-72703e93f162
-    });
-  </script>
+    <!-- Services Section -->
+    <section id="servicios" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-blue-600 font-semibold tracking-wide uppercase text-sm">Nuestros Servicios</h2>
+                <h3 class="mt-2 text-3xl leading-8 font-bold tracking-tight text-gray-900 sm:text-4xl">
+                    Tratamientos Especializados
+                </h3>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+                    Todo lo que necesitas para una salud bucal perfecta en un solo lugar.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Odontología General -->
+                <div class="service-card group bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Odontología General" class="service-img w-full h-full object-cover">
+                        <div class="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md text-dental-blue">
+                            <i class="fas fa-stethoscope text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-dental-purple transition-colors">Odontología General</h4>
+                        <p class="text-gray-600">Diagnóstico, limpieza y prevención para mantener tu boca sana día a día.</p>
+                    </div>
+                </div>
+
+                <!-- Cirugía Bucal -->
+                <div class="service-card group bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1609840114035-1c99d59242cc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Cirugía Bucal" class="service-img w-full h-full object-cover">
+                        <div class="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md text-dental-blue">
+                            <i class="fas fa-syringe text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-dental-purple transition-colors">Cirugía Bucal</h4>
+                        <p class="text-gray-600">Extracciones de cordales y procedimientos quirúrgicos con la mejor tecnología.</p>
+                    </div>
+                </div>
+
+                <!-- Odontología Estética -->
+                <div class="service-card group bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1588776814546-1b98f095bb28?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Odontología Estética" class="service-img w-full h-full object-cover">
+                        <div class="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md text-dental-blue">
+                            <i class="fas fa-gem text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-dental-purple transition-colors">Odontología Estética</h4>
+                        <p class="text-gray-600">Diseño de sonrisa, blanqueamientos y carillas para que sonrías con confianza.</p>
+                    </div>
+                </div>
+
+                <!-- Prótesis Dental -->
+                <div class="service-card group bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Prótesis Dental" class="service-img w-full h-full object-cover">
+                        <div class="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md text-dental-blue">
+                            <i class="fas fa-teeth-open text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-dental-purple transition-colors">Prótesis Dental</h4>
+                        <p class="text-gray-600">Recupera la funcionalidad y estética de tu boca con prótesis fijas o removibles.</p>
+                    </div>
+                </div>
+
+                <!-- Atención Infantil -->
+                <div class="service-card group bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 md:col-span-2 lg:col-span-2 bg-gradient-to-r from-blue-50 to-purple-50">
+                    <div class="flex flex-col md:flex-row h-full">
+                        <div class="md:w-1/2 h-48 md:h-auto overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1598965402089-274122d48079?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Atención Infantil" class="service-img w-full h-full object-cover">
+                        </div>
+                        <div class="p-6 md:w-1/2 flex flex-col justify-center">
+                            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md text-dental-purple mb-4">
+                                <i class="fas fa-child text-xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-dental-purple transition-colors">Atención Infantil (Odontopediatría)</h4>
+                            <p class="text-gray-600">Cuidado especializado para los pequeños de la casa en un ambiente amable y sin dolor.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Contact Section -->
+    <section id="ubicacion" class="bg-gray-900 text-white py-20 relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-dental-blue opacity-10 blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-dental-purple opacity-10 blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6">Visítanos en Maturín</h2>
+                    <p class="text-gray-400 mb-8">Estamos listos para atenderte con la mejor disposición y profesionalismo. Agenda tu cita hoy mismo.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-dental-blue">
+                                <i class="fas fa-map-marked-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold">Dirección</h4>
+                                <p class="text-gray-300">Clínica Santa Sofía, Piso 3, Consultorio 3-03.<br>Maturín, Estado Monagas.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-green-400">
+                                <i class="fab fa-whatsapp text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold">Teléfono / WhatsApp</h4>
+                                <p class="text-gray-300 text-xl font-mono mt-1">0412-8020652</p>
+                                <a href="https://wa.me/584128020652" class="text-sm text-dental-blue hover:underline mt-1 inline-block">Enviar mensaje ahora &rarr;</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-dental-purple">
+                                <i class="far fa-clock text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold">Horario</h4>
+                                <p class="text-gray-300">Lunes a Viernes: 8:00 AM - 5:00 PM<br>Sábados: Previa Cita</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mock Map / Appointment Card -->
+                <div class="bg-white rounded-2xl p-2 shadow-2xl overflow-hidden">
+                    <div class="bg-gray-100 w-full h-full rounded-xl flex flex-col items-center justify-center text-gray-400 min-h-[300px] relative group cursor-pointer">
+                       <!-- This simulates a map embed -->
+                       <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=Clinica%20Santa%20Sofia%20Maturin&t=&z=15&ie=UTF8&iwloc=&output=embed" class="absolute inset-0 grayscale group-hover:grayscale-0 transition duration-500"></iframe>
+                       <div class="absolute bottom-4 left-4 bg-white p-3 rounded-lg shadow-lg z-10 pointer-events-none">
+                           <p class="text-xs font-bold text-gray-800">Clínica Santa Sofía</p>
+                           <p class="text-xs text-gray-500">Piso 3, Consultorio 3-03</p>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-50 border-t border-gray-200 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-gray-500 text-sm">© 2024 Odontología Especializada Maturín. Todos los derechos reservados.</p>
+            <div class="flex space-x-4">
+                <a href="#" class="text-gray-400 hover:text-dental-blue transition"><i class="fab fa-instagram text-xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-blue-600 transition"><i class="fab fa-facebook text-xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        function toggleMenu() {
+            menu.classList.add('hidden');
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+                nav.classList.replace('bg-white/90', 'bg-white');
+            } else {
+                nav.classList.remove('shadow-md');
+                nav.classList.replace('bg-white', 'bg-white/90');
+            }
+        });
+
+        // Simple animation on scroll for services
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card').forEach((card, index) => {
+            card.classList.add('opacity-0', 'translate-y-10', 'transition', 'duration-700', 'ease-out');
+            card.style.transitionDelay = `${index * 100}ms`;
+            observer.observe(card);
+        });
+    </script>
 </body>
 </html>
