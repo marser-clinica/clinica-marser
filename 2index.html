@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marser Automatiza | Ecosistema de Gestión Inteligente</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- VARIABLES Y CONFIGURACIÓN --- */
+        :root {
+            --primary: #0a2540; /* Azul oscuro corporativo */
+            --primary-light: #183b5e;
+            --accent: #00d4ff; /* Azul cian tecnológico/futurista */
+            --accent-hover: #00b8dd;
+            --text-dark: #1a1a1a;
+            --text-gray: #4a5568;
+            --light-bg: #f8fafc;
+            --white: #ffffff;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, #061525 100%);
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; }
+        ul { list-style: none; }
+
+        /* --- COMPONENTES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--primary);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h1, h2, h3 {
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i { color: var(--accent); }
+        .logo span { color: var(--accent); }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .cta-header {
+            display: none;
+        }
+
+        @media(min-width: 768px) {
+            .cta-header { display: block; padding: 10px 25px; }
+        }
+
+        /* --- HERO --- */
+        .hero {
+            background: var(--gradient);
+            color: var(--white);
+            padding-top: 180px;
+            padding-bottom: 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.03);
+            z-index: 1;
+        }
+        .circle-1 { width: 500px; height: 500px; top: -100px; right: -100px; }
+        .circle-2 { width: 300px; height: 300px; bottom: 50px; left: -50px; }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: rgba(0, 212, 255, 0.3);
+            z-index: -1;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 40px;
+        }
+
+        .stat-item h3 { font-size: 2rem; color: var(--accent); margin-bottom: 5px; }
+        .stat-item p { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- PROBLEMAS --- */
+        .problems { background: var(--white); }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            border: 1px solid #eee;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(10, 37, 64, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .card p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        /* --- SOLUCIÓN / FEATURE --- */
+        .solution {
+            background: var(--light-bg);
+        }
+
+        .feature-box {
+            display: flex;
+            align-items: center;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: var(--shadow);
+            gap: 50px;
+        }
+
+        .feature-content { flex: 1; }
+        .feature-content h3 { font-size: 2rem; color: var(--primary); margin-bottom: 20px; }
+        
+        /* Lista de beneficios ajustada al Ecosistema */
+        .feature-list li {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .feature-list i {
+            color: var(--accent);
+            background: rgba(0, 212, 255, 0.1);
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 0.9rem;
+            margin-top: 3px;
+            flex-shrink: 0; /* Evita que el icono se aplaste */
+        }
+
+        .feature-img {
+            flex: 1;
+            background: var(--primary);
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            position: relative;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .chat-simulation {
+            background: #0b141a; 
+            border-radius: 10px;
+            padding: 15px;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 13px;
+        }
+        
+        .msg {
+            max-width: 80%;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .msg-in {
+            background: #202c33;
+            color: #e9edef;
+            align-self: flex-start;
+            margin-right: auto;
+        }
+        
+        .msg-out {
+            background: #005c4b;
+            color: #e9edef;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        
+        .msg-time {
+            font-size: 10px;
+            color: #8696a0;
+            text-align: right;
+            margin-top: 2px;
+        }
+
+        /* --- CEO SECTION --- */
+        .ceo-section {
+            background: var(--white);
+            position: relative;
+        }
+
+        .ceo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .ceo-image {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* DISEÑO CIRCULAR */
+        .ceo-image img {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--accent);
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.25);
+            transition: all 0.3s ease;
+            background-color: var(--primary);
+        }
+
+        .ceo-image img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 45px rgba(0, 212, 255, 0.4);
+            border-color: var(--primary);
+        }
+
+        .ceo-badge {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--white);
+            padding: 12px 30px;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 10;
+            white-space: nowrap;
+            border: 1px solid #eee;
+        }
+
+        .ceo-badge i {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        .ceo-info {
+            flex: 1.2;
+        }
+
+        .quote-icon {
+            font-size: 4rem;
+            color: rgba(10, 37, 64, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .ceo-text {
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--text-gray);
+            margin-bottom: 30px;
+        }
+
+        .ceo-name {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
+
+        .ceo-role {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- CTA FINAL --- */
+        .cta-section {
+            background: var(--gradient);
+            color: var(--white);
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .cta-section h2 { font-size: 2.8rem; margin-bottom: 20px; }
+        .cta-section p { font-size: 1.2rem; margin-bottom: 40px; opacity: 0.9; }
+
+        /* --- MODAL DE AGENDAMIENTO --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 37, 64, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 900px;
+            height: 80vh;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 20px 30px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8fafc;
+        }
+
+        .modal-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #666;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-modal:hover { color: var(--accent); }
+
+        .calendar-container {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #020b16;
+            color: #8899a6;
+            padding: 60px 0 20px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            color: var(--white);
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        .footer-logo span { color: var(--accent); }
+
+        .social-links { margin-bottom: 40px; }
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        .social-links a:hover { color: var(--accent); }
+
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 968px) {
+            .hero h1 { font-size: 2.5rem; }
+            .feature-box { flex-direction: column; padding: 30px; }
+            .ceo-wrapper { flex-direction: column; text-align: center; }
+            .ceo-badge { right: 50%; transform: translateX(50%); bottom: -20px; }
+            .quote-icon { margin: 0 auto 20px; display: block; }
+            .nav-links { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .hero { padding-top: 140px; }
+            .hero h1 { font-size: 2rem; }
+            .btn { width: 100%; text-align: center; }
+            .stat-item h3 { font-size: 1.5rem; }
+            .modal-content { height: 90vh; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVEGACIÓN -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fa-solid fa-robot"></i>
+                    MARSER<span>AUTOMATIZA</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#problema">El Problema</a>
+                    <a href="#solucion">Ecosistema</a>
+                    <a href="#ceo">Sobre Nosotros</a>
+                </div>
+                <a href="#" class="btn btn-primary cta-header js-open-calendar">Agendar Llamada</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="bg-circle circle-1"></div>
+        <div class="bg-circle circle-2"></div>
+        <div class="container hero-content">
+            <h1>Tu Clínica Dental Pierde Pacientes Mientras Duermes <br><span>(Y Tenemos la Solución)</span></h1>
+            <!-- TEXTO ACTUALIZADO: Refleja el Ecosistema -->
+            <p>Implementamos un Ecosistema de Gestión Inteligente que conecta WhatsApp, Email y Google Sheets. Desde la captación del paciente hasta el reporte que recibes cada mañana.</p>
+            <a href="#" class="btn btn-primary btn-large js-open-calendar">Agendar Llamada <i class="fa-solid fa-arrow-right" style="margin-left: 10px;"></i></a>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p>Atención IA</p>
+                </div>
+                <div class="stat-item">
+                    <h3>1 seg</h3>
+                    <p>Confirmación</p>
+                </div>
+                <div class="stat-item">
+                    <h3>-90%</h3>
+                    <p>Ausentismo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EL PROBLEMA -->
+    <section id="problema" class="problems">
+        <div class="container">
+            <h2 class="section-title">¿Te suena familiar este escenario?</h2>
+            <p class="section-subtitle">Detectamos las fugas de dinero exactas en tu flujo operativo actual.</p>
+            
+            <div class="grid-3">
+                <!-- Problema 1: Falta de atención inmediata -->
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-phone-slash"></i>
+                    </div>
+                    <h3>Leads Ignorados</h3>
+                    <p>Tus anuncios traen interesados a toda hora, pero si no respondes en el momento, se van a la competencia. Tu equipo humano no puede estar 24/7.</p>
+                </div>
+                
+                <!-- Problema 2: El No-Show -->
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-user-xmark"></i>
+                    </div>
+                    <h3>Ausentismo (No-Show)</h3>
+                    <p>Pacientes que agendan y no llegan. Perseguir confirmaciones manualmente por WhatsApp es ineficiente y desgastante para tu recepcionista.</p>
+                </div>
+                
+                <!-- Problema 3: Descontrol Operativo -->
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-clipboard-question"></i>
+                    </div>
+                    <h3>Agenda "A Ciegas"</h3>
+                    <p>Llegas a la clínica sin un reporte claro de tu día. ¿Quién viene? ¿Qué servicio toca? Pierdes tiempo valioso organizando tu jornada cada mañana.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LA SOLUCIÓN (EL ECOSISTEMA) -->
+    <section id="solucion" class="solution">
+        <div class="container">
+            <div class="feature-box">
+                <div class="feature-content">
+                    <h3>El Ecosistema de Gestión Inteligente</h3>
+                    <p style="margin-bottom: 20px;">No es solo un chatbot. Es una red de 5 sistemas interconectados (Whapi, Google Sheets, Gmail) trabajando en piloto automático.</p>
+                    
+                    <ul class="feature-list">
+                        <!-- Punto 1: El Cerebro -->
+                        <li>
+                            <i class="fa-solid fa-brain"></i>
+                            <div><strong>1. El Cerebro (Agente IA):</strong> Califica leads y agenda citas 24/7 en WhatsApp, guardando todo en tu base de datos maestra.</div>
+                        </li>
+                        <!-- Punto 2: Confirmación Inmediata -->
+                        <li>
+                            <i class="fa-solid fa-envelope-circle-check"></i>
+                            <div><strong>2. Confirmación Inmediata:</strong> 1 segundo después de agendar, el paciente recibe un correo con botones para añadir a Google Calendar.</div>
+                        </li>
+                        <!-- Punto 3: Motor de Recordatorios -->
+                        <li>
+                            <i class="fa-solid fa-bell"></i>
+                            <div><strong>3. Motor Anti-Ausentismo:</strong> Un sistema automático envía recordatorios diarios con botones dinámicos para Confirmar o Cancelar.</div>
+                        </li>
+                        <!-- Punto 4: Centro de Procesamiento -->
+                        <li>
+                            <i class="fa-solid fa-arrows-rotate"></i>
+                            <div><strong>4. Procesamiento Automático:</strong> Si el paciente confirma o cancela, el sistema actualiza tu hoja de cálculo en tiempo real, sin intervención humana.</div>
+                        </li>
+                        <!-- Punto 5: Reporte al Doctor -->
+                        <li>
+                            <i class="fa-solid fa-file-medical"></i>
+                            <div><strong>5. Tu Reporte Matutino:</strong> Recibes cada mañana (7:00 AM) un resumen ejecutivo en tu móvil con la agenda depurada del día.</div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Visualización del Chat -->
+                <div class="feature-img">
+                    <div class="chat-simulation">
+                        <div class="msg msg-in">
+                            Hola, quiero una cita para ortodoncia.
+                            <div class="msg-time">23:45</div>
+                        </div>
+                        <div class="msg msg-out">
+                            ¡Hola! 👋 Claro que sí. ¿Es tu primera vez con nosotros o ya tienes historial en la clínica? (Para agendarte con el especialista correcto).
+                            <div class="msg-time">23:45</div>
+                        </div>
+                        <div class="msg msg-in">
+                            Es primera vez.
+                            <div class="msg-time">23:46</div>
+                        </div>
+                        <div class="msg msg-out">
+                            Perfecto. Tengo espacios mañana a las 9:00 AM o el Jueves a las 4:00 PM. ¿Cuál prefieres reservar? 📅
+                            <div class="msg-time">23:46</div>
+                        </div>
+                        <div style="text-align: center; margin-top: 10px; font-size: 0.8rem; color: #8899a6;">
+                            ...Cita agendada...
+                        </div>
+                        <div style="background: #e9edef; color: #1a1a1a; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 0.85rem;">
+                            <i class="fa-solid fa-check-circle" style="color: green;"></i> <strong>Sistema:</strong> Cita guardada en Google Sheets ID: CITA-001. Correo de confirmación enviado.
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 15px; color: #fff; font-size: 0.9rem;">
+                        <i class="fa-solid fa-bolt" style="color: var(--accent);"></i> Flujo Real del Ecosistema
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CEO / MARCA PERSONAL -->
+    <section id="ceo" class="ceo-section">
+        <div class="container">
+            <div class="ceo-wrapper">
+                <div class="ceo-image">
+                    <!-- IMAGEN CON DISEÑO CIRCULAR -->
+                    <img src="https://i.ibb.co/60nBxh4Y/88de8eb1-1133-4199-a949-12724d0b25d7.jpg" alt="Sergio M Bompart CEO">
+                    
+                    <div class="ceo-badge">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <div>
+                            <div style="font-weight: 700; color: var(--primary);">Resultados</div>
+                            <div style="font-size: 0.8rem; color: #666;">Enfoque 100% Medible</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ceo-info">
+                    <i class="fa-solid fa-quote-left quote-icon"></i>
+                    <h2 style="margin-bottom: 20px; color: var(--primary);">Detrás de la Tecnología</h2>
+                    <div class="ceo-text">
+                        "No somos una agencia de marketing más. Somos ingenieros de automatización obsesionados con la eficiencia clínica. Creé <strong>Marser Automatiza</strong> porque vi cómo excelentes doctores perdían miles de dólares simplemente por no poder contestar el teléfono a tiempo.<br><br>
+                        Mi compromiso es simple: No te vendo un software, te vendo resultados medibles. Yo mismo superviso la implementación de cada agente para asegurar que se adapte perfectamente al flujo de tu clínica."
+                    </div>
+                    <div class="ceo-name">Sergio M Bompart</div>
+                    <div class="ceo-role">CEO & Fundador</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section id="contacto" class="cta-section">
+        <div class="container">
+            <h2>¿Listo para modernizar tu clínica?</h2>
+            <p>Deja de perder pacientes por no responder a tiempo. Agenda una auditoría gratuita y mira cómo funciona el ecosistema en tiempo real.</p>
+            <button class="btn btn-primary btn-large js-open-calendar" style="background: var(--white); color: var(--primary);">
+                Agendar Llamada
+            </button>
+            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.7;">*Solo trabajamos con 5 clínicas nuevas por mes para garantizar calidad.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">MARSER <span>AUTOMATIZA</span></div>
+            <div class="social-links">
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Marser Automatiza. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- SISTEMA DE MODAL (AGENDAMIENTO) -->
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Selecciona un horario para tu auditoría</div>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="calendar-container">
+                <!-- CALENDARIO INTEGRADO -->
+                <iframe 
+                    src="https://calendly.com/sergiomarcano01/30min" 
+                    width="100%" 
+                    height="100%" 
+                    frameborder="0" 
+                    title="Agendar Llamada con Sergio">
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT: Lógica del Modal -->
+    <script>
+        // Selección de elementos
+        const modal = document.getElementById('bookingModal');
+        const openButtons = document.querySelectorAll('.js-open-calendar');
+        const closeButton = document.getElementById('closeModal');
+
+        // Función para abrir modal
+        function openModal(e) {
+            e.preventDefault(); 
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        // Función para cerrar modal
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto'; 
+        }
+
+        // Asignar evento a TODOS los botones de agendar
+        openButtons.forEach(button => {
+            button.addEventListener('click', openModal);
+        });
+
+        // Cerrar con la X
+        closeButton.addEventListener('click', closeModal);
+
+        // Cerrar haciendo click fuera
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // Smooth Scroll para otros enlaces
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (!this.classList.contains('js-open-calendar')) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
