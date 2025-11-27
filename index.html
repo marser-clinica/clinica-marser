@@ -2,13 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marser Automatiza | Ecosistema de Gestión Inteligente</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Marser | Ecosistema de Gestión Inteligente</title>
     
     <!-- ICONO DE LA PESTAÑA (FAVICON) -->
-    <!-- He puesto un robot azul tecnológico. Si quieres poner tu logo propio:
-         1. Guarda tu imagen en la misma carpeta.
-         2. Cambia el enlace de abajo por el nombre de tu archivo (ej: href="logo.png") -->
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/4712/4712109.png">
 
     <!-- Google Fonts -->
@@ -19,9 +16,9 @@
     <style>
         /* --- VARIABLES Y CONFIGURACIÓN --- */
         :root {
-            --primary: #0a2540; /* Azul oscuro corporativo */
+            --primary: #0a2540;
             --primary-light: #183b5e;
-            --accent: #00d4ff; /* Azul cian tecnológico/futurista */
+            --accent: #00d4ff;
             --accent-hover: #00b8dd;
             --text-dark: #1a1a1a;
             --text-gray: #4a5568;
@@ -29,6 +26,10 @@
             --white: #ffffff;
             --gradient: linear-gradient(135deg, var(--primary) 0%, #061525 100%);
             --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            
+            /* Espaciados Responsive */
+            --section-padding-desktop: 80px 0;
+            --section-padding-mobile: 50px 0;
         }
 
         * {
@@ -42,6 +43,7 @@
             color: var(--text-dark);
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         a { text-decoration: none; }
@@ -52,6 +54,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            width: 100%;
         }
 
         .btn {
@@ -65,6 +68,7 @@
             letter-spacing: 0.5px;
             font-size: 0.9rem;
             box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+            text-align: center;
         }
 
         .btn-primary {
@@ -79,18 +83,8 @@
             box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
         }
 
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--accent);
-            color: var(--accent);
-        }
-        
-        .btn-outline:hover {
-            background: rgba(0, 212, 255, 0.1);
-        }
-
         section {
-            padding: 80px 0;
+            padding: var(--section-padding-desktop);
         }
 
         h1, h2, h3 {
@@ -121,26 +115,30 @@
             width: 100%;
             top: 0;
             z-index: 1000;
+            height: 70px; /* Altura fija para evitar saltos */
+            display: flex;
+            align-items: center;
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 80px;
+            width: 100%;
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 800;
             color: var(--primary);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            white-space: nowrap; /* Evita que el logo se parta en dos líneas */
         }
 
         .logo i { color: var(--accent); }
-        .logo span { color: var(--accent); }
+        /* span eliminado según instrucciones */
 
         .nav-links {
             display: flex;
@@ -150,36 +148,33 @@
         .nav-links a {
             color: var(--primary);
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             transition: color 0.3s;
         }
 
         .nav-links a:hover { color: var(--accent); }
 
         .cta-header {
-            display: none;
-        }
-
-        @media(min-width: 768px) {
-            .cta-header { display: block; padding: 10px 25px; }
+            padding: 10px 20px;
+            font-size: 0.8rem;
         }
 
         /* --- HERO --- */
         .hero {
             background: var(--gradient);
             color: var(--white);
-            padding-top: 180px;
-            padding-bottom: 120px;
+            padding-top: 160px; /* Espacio para el header fijo */
+            padding-bottom: 100px;
             position: relative;
             overflow: hidden;
         }
 
-        /* Elementos decorativos de fondo */
         .bg-circle {
             position: absolute;
             border-radius: 50%;
             background: rgba(255,255,255,0.03);
             z-index: 1;
+            pointer-events: none; /* Para que no interfieran con clics */
         }
         .circle-1 { width: 500px; height: 500px; top: -100px; right: -100px; }
         .circle-2 { width: 300px; height: 300px; bottom: 50px; left: -50px; }
@@ -197,22 +192,10 @@
             margin-bottom: 25px;
         }
 
+        /* ELIMINADO EL SUBRAYADO (::after) */
         .hero h1 span {
             color: var(--accent);
-            position: relative;
             display: inline-block;
-        }
-        
-        /* Subrayado animado */
-        .hero h1 span::after {
-            content: '';
-            position: absolute;
-            bottom: 5px;
-            left: 0;
-            width: 100%;
-            height: 8px;
-            background: rgba(0, 212, 255, 0.3);
-            z-index: -1;
         }
 
         .hero p {
@@ -229,17 +212,19 @@
             margin-top: 60px;
             border-top: 1px solid rgba(255,255,255,0.1);
             padding-top: 40px;
+            flex-wrap: wrap; /* Permite que bajen si no caben */
         }
 
         .stat-item h3 { font-size: 2rem; color: var(--accent); margin-bottom: 5px; }
         .stat-item p { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- PROBLEMAS --- */
+        /* --- PROBLEMAS (Cards) --- */
         .problems { background: var(--white); }
 
         .grid-3 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            /* Ajustado para móviles pequeños: min 280px */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
 
@@ -252,11 +237,6 @@
             border: 1px solid #eee;
             position: relative;
             overflow: hidden;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
         }
 
         .card-icon {
@@ -272,20 +252,11 @@
             color: var(--primary);
         }
 
-        .card h3 {
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-
-        .card p {
-            color: var(--text-gray);
-            font-size: 0.95rem;
-        }
+        .card h3 { margin-bottom: 15px; color: var(--primary); }
+        .card p { color: var(--text-gray); font-size: 0.95rem; }
 
         /* --- SOLUCIÓN / FEATURE --- */
-        .solution {
-            background: var(--light-bg);
-        }
+        .solution { background: var(--light-bg); }
 
         .feature-box {
             display: flex;
@@ -300,7 +271,6 @@
         .feature-content { flex: 1; }
         .feature-content h3 { font-size: 2rem; color: var(--primary); margin-bottom: 20px; }
         
-        /* Lista de beneficios ajustada al Ecosistema */
         .feature-list li {
             margin-bottom: 25px;
             display: flex;
@@ -319,7 +289,7 @@
             border-radius: 50%;
             font-size: 0.9rem;
             margin-top: 3px;
-            flex-shrink: 0; /* Evita que el icono se aplaste */
+            flex-shrink: 0;
         }
 
         .feature-img {
@@ -333,6 +303,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            width: 100%; /* Asegura que ocupe el ancho en móvil */
         }
         
         .chat-simulation {
@@ -341,42 +312,24 @@
             padding: 15px;
             font-family: Helvetica, Arial, sans-serif;
             font-size: 13px;
+            max-width: 100%; /* Evita desbordamiento */
         }
         
         .msg {
-            max-width: 80%;
+            max-width: 85%;
             padding: 8px 12px;
             border-radius: 8px;
             margin-bottom: 10px;
             position: relative;
+            word-wrap: break-word; /* Rompe palabras largas */
         }
         
-        .msg-in {
-            background: #202c33;
-            color: #e9edef;
-            align-self: flex-start;
-            margin-right: auto;
-        }
-        
-        .msg-out {
-            background: #005c4b;
-            color: #e9edef;
-            align-self: flex-end;
-            margin-left: auto;
-        }
-        
-        .msg-time {
-            font-size: 10px;
-            color: #8696a0;
-            text-align: right;
-            margin-top: 2px;
-        }
+        .msg-in { background: #202c33; color: #e9edef; align-self: flex-start; margin-right: auto; }
+        .msg-out { background: #005c4b; color: #e9edef; align-self: flex-end; margin-left: auto; }
+        .msg-time { font-size: 10px; color: #8696a0; text-align: right; margin-top: 2px; }
 
         /* --- CEO SECTION --- */
-        .ceo-section {
-            background: var(--white);
-            position: relative;
-        }
+        .ceo-section { background: var(--white); position: relative; }
 
         .ceo-wrapper {
             display: flex;
@@ -387,35 +340,27 @@
         .ceo-image {
             flex: 1;
             position: relative;
-            /* Centramos la imagen para el nuevo diseño */
             display: flex;
             justify-content: center;
         }
 
-        /* DISEÑO ACTUALIZADO: PERFIL CIRCULAR MODERNO */
+        /* DISEÑO CIRCULAR */
         .ceo-image img {
             width: 320px;
             height: 320px;
-            border-radius: 50%; /* Crea el círculo perfecto */
-            object-fit: cover;  /* Asegura que la cara se vea bien centrada */
-            border: 5px solid var(--accent); /* Borde tecnológico */
-            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.25); /* Sombra luminosa */
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--accent);
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.25);
             transition: all 0.3s ease;
-            background-color: var(--primary); /* Fondo de seguridad */
-        }
-
-        /* Efecto al pasar el mouse */
-        .ceo-image img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 45px rgba(0, 212, 255, 0.4);
-            border-color: var(--primary);
+            background-color: var(--primary);
         }
 
         .ceo-badge {
             position: absolute;
             bottom: 10px;
             left: 50%;
-            transform: translateX(-50%); /* Centrado perfectamente abajo */
+            transform: translateX(-50%);
             background: var(--white);
             padding: 12px 30px;
             border-radius: 50px;
@@ -428,41 +373,12 @@
             border: 1px solid #eee;
         }
 
-        .ceo-badge i {
-            font-size: 2rem;
-            color: var(--accent);
-        }
-
-        .ceo-info {
-            flex: 1.2;
-        }
-
-        .quote-icon {
-            font-size: 4rem;
-            color: rgba(10, 37, 64, 0.1);
-            margin-bottom: 20px;
-        }
-
-        .ceo-text {
-            font-size: 1.15rem;
-            font-style: italic;
-            color: var(--text-gray);
-            margin-bottom: 30px;
-        }
-
-        .ceo-name {
-            font-weight: 800;
-            font-size: 1.4rem;
-            color: var(--primary);
-        }
-
-        .ceo-role {
-            color: var(--accent); /* Cambiado a Accent para resaltar */
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        .ceo-badge i { font-size: 2rem; color: var(--accent); }
+        .ceo-info { flex: 1.2; }
+        .quote-icon { font-size: 4rem; color: rgba(10, 37, 64, 0.1); margin-bottom: 20px; }
+        .ceo-text { font-size: 1.15rem; font-style: italic; color: var(--text-gray); margin-bottom: 30px; }
+        .ceo-name { font-weight: 800; font-size: 1.4rem; color: var(--primary); }
+        .ceo-role { color: var(--accent); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
 
         /* --- CTA FINAL --- */
         .cta-section {
@@ -475,33 +391,31 @@
         .cta-section h2 { font-size: 2.8rem; margin-bottom: 20px; }
         .cta-section p { font-size: 1.2rem; margin-bottom: 40px; opacity: 0.9; }
 
-        /* --- MODAL DE AGENDAMIENTO (NUEVO ESTILO) --- */
+        /* --- MODAL DE AGENDAMIENTO --- */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 37, 64, 0.85); /* Fondo oscuro azulado */
+            background: rgba(10, 37, 64, 0.95);
             backdrop-filter: blur(5px);
             z-index: 2000;
-            display: none; /* Oculto por defecto */
+            display: none;
             align-items: center;
             justify-content: center;
             opacity: 0;
             transition: opacity 0.3s ease;
+            padding: 20px; /* Margen en móviles */
         }
 
-        .modal-overlay.active {
-            display: flex;
-            opacity: 1;
-        }
+        .modal-overlay.active { display: flex; opacity: 1; }
 
         .modal-content {
             background: white;
-            width: 90%;
+            width: 100%;
             max-width: 900px;
-            height: 80vh; /* Alto del modal */
+            height: 85vh;
             border-radius: 20px;
             box-shadow: 0 25px 50px rgba(0,0,0,0.5);
             position: relative;
@@ -512,12 +426,10 @@
             overflow: hidden;
         }
 
-        .modal-overlay.active .modal-content {
-            transform: translateY(0);
-        }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
 
         .modal-header {
-            padding: 20px 30px;
+            padding: 15px 20px;
             border-bottom: 1px solid #eee;
             display: flex;
             justify-content: space-between;
@@ -525,40 +437,9 @@
             background: #f8fafc;
         }
 
-        .modal-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: #666;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .close-modal:hover { color: var(--accent); }
-
-        .calendar-container {
-            flex: 1;
-            width: 100%;
-            height: 100%;
-            /* Aquí es donde se carga el iframe */
-        }
-        
-        .calendar-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            background: #fff;
-        }
+        .modal-title { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
+        .close-modal { background: none; border: none; font-size: 2rem; line-height: 1; color: #666; cursor: pointer; padding: 0 10px; }
+        .calendar-container { flex: 1; width: 100%; height: 100%; -webkit-overflow-scrolling: touch; }
 
         /* --- FOOTER --- */
         footer {
@@ -567,47 +448,75 @@
             padding: 60px 0 20px;
             text-align: center;
         }
+        .footer-logo { font-size: 1.8rem; color: var(--white); font-weight: 800; margin-bottom: 20px; display: inline-block; }
+        .copyright { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; font-size: 0.9rem; }
 
-        .footer-logo {
-            font-size: 1.8rem;
-            color: var(--white);
-            font-weight: 800;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-        .footer-logo span { color: var(--accent); }
-
-        .social-links { margin-bottom: 40px; }
-        .social-links a {
-            color: var(--white);
-            font-size: 1.5rem;
-            margin: 0 15px;
-            transition: color 0.3s;
-        }
-        .social-links a:hover { color: var(--accent); }
-
-        .copyright {
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 20px;
-            font-size: 0.9rem;
-        }
-
-        /* --- RESPONSIVE --- */
+        /* =========================================
+           MEDIA QUERIES - OPTIMIZACIÓN MÓVIL
+           ========================================= */
+        
+        /* Tablets y móviles grandes */
         @media (max-width: 968px) {
-            .hero h1 { font-size: 2.5rem; }
-            .feature-box { flex-direction: column; padding: 30px; }
-            .ceo-wrapper { flex-direction: column; text-align: center; }
-            .ceo-badge { right: 50%; transform: translateX(50%); bottom: -20px; }
+            section { padding: var(--section-padding-mobile); }
+            
+            /* Navbar simplificado */
+            .nav-links { display: none; } /* Ocultamos los links de texto para limpiar el header */
+            
+            /* Hero ajustado */
+            .hero { padding-top: 130px; text-align: center; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1.1rem; }
+            .hero-stats { gap: 20px; justify-content: center; }
+            .stat-item { min-width: 100px; margin-bottom: 10px; }
+            .stat-item h3 { font-size: 1.8rem; }
+
+            /* Feature Box apilada */
+            .feature-box { flex-direction: column; padding: 30px 20px; gap: 30px; }
+            .feature-img { min-height: auto; }
+
+            /* CEO apilado */
+            .ceo-wrapper { flex-direction: column; text-align: center; gap: 40px; }
+            .ceo-bio { text-align: left; } /* Texto alineado a la izquierda para leer mejor */
             .quote-icon { margin: 0 auto 20px; display: block; }
-            .nav-links { display: none; } /* En móvil ocultamos links para simplificar */
+            
+            /* Ajuste CTA Final */
+            .cta-section h2 { font-size: 2rem; }
         }
 
+        /* Móviles pequeños (iPhone SE, etc.) */
         @media (max-width: 480px) {
-            .hero { padding-top: 140px; }
-            .hero h1 { font-size: 2rem; }
-            .btn { width: 100%; text-align: center; }
-            .stat-item h3 { font-size: 1.5rem; }
-            .modal-content { height: 90vh; }
+            .container { padding: 0 15px; }
+            
+            /* Logo más pequeño para que quepa el botón */
+            .logo { font-size: 1.1rem; }
+            .cta-header { padding: 8px 15px; font-size: 0.75rem; }
+
+            /* Títulos */
+            .section-title { font-size: 1.8rem; }
+            
+            /* Ajuste de imagen CEO para móvil */
+            .ceo-image img {
+                width: 250px;
+                height: 250px;
+                border-width: 4px;
+            }
+            
+            /* Badge CEO ajustado */
+            .ceo-badge { 
+                padding: 8px 20px; 
+                width: 90%; 
+                justify-content: center;
+                bottom: -20px;
+            }
+            .ceo-badge i { font-size: 1.5rem; }
+            .ceo-badge div { font-size: 0.9rem; }
+
+            /* Botones ancho completo */
+            .btn-large { width: 100%; display: block; }
+            
+            /* Modal casi pantalla completa */
+            .modal-content { height: 90vh; width: 100%; border-radius: 15px 15px 0 0; }
+            .modal-overlay { padding: 0; align-items: flex-end; } /* Modal sale desde abajo */
         }
     </style>
 </head>
@@ -619,14 +528,15 @@
             <nav>
                 <div class="logo">
                     <i class="fa-solid fa-robot"></i>
-                    MARSER<span>AUTOMATIZA</span>
+                    MARSER
                 </div>
+                <!-- Links visibles solo en PC, ocultos en móvil -->
                 <div class="nav-links">
                     <a href="#problema">El Problema</a>
                     <a href="#solucion">Ecosistema</a>
                     <a href="#ceo">Sobre Nosotros</a>
                 </div>
-                <!-- BOTÓN HEADER: Agregada clase 'js-open-calendar' y href="#" -->
+                <!-- Botón siempre visible -->
                 <a href="#" class="btn btn-primary cta-header js-open-calendar">Agendar Llamada</a>
             </nav>
         </div>
@@ -637,10 +547,8 @@
         <div class="bg-circle circle-1"></div>
         <div class="bg-circle circle-2"></div>
         <div class="container hero-content">
-            <h1>Tu Clínica Dental Pierde Pacientes Mientras Duermes <br><span>(Y Tenemos la Solución)</span></h1>
-            <!-- TEXTO ACTUALIZADO: Refleja el Ecosistema -->
+            <h1>Convierte Consultas en <br><span>Pacientes Reales y Elimina el Ausentismo con IA</span></h1>
             <p>Implementamos un Ecosistema de Gestión Inteligente que conecta WhatsApp, Email y Google Sheets. Desde la captación del paciente hasta el reporte que recibes cada mañana.</p>
-            <!-- BOTÓN HERO: Agregada clase 'js-open-calendar' y href="#" -->
             <a href="#" class="btn btn-primary btn-large js-open-calendar">Agendar Llamada <i class="fa-solid fa-arrow-right" style="margin-left: 10px;"></i></a>
             
             <div class="hero-stats">
@@ -663,35 +571,24 @@
     <!-- EL PROBLEMA -->
     <section id="problema" class="problems">
         <div class="container">
-            <h2 class="section-title">¿Te suena familiar este escenario?</h2>
+            <h2 class="section-title">¿Te suena familiar?</h2>
             <p class="section-subtitle">Detectamos las fugas de dinero exactas en tu flujo operativo actual.</p>
             
             <div class="grid-3">
-                <!-- Problema 1: Falta de atención inmediata -->
                 <div class="card">
-                    <div class="card-icon">
-                        <i class="fa-solid fa-phone-slash"></i>
-                    </div>
+                    <div class="card-icon"><i class="fa-solid fa-phone-slash"></i></div>
                     <h3>Leads Ignorados</h3>
-                    <p>Tus anuncios traen interesados a toda hora, pero si no respondes en el momento, se van a la competencia. Tu equipo humano no puede estar 24/7.</p>
+                    <p>Tus anuncios traen interesados a toda hora, pero si no respondes en el momento, se van a la competencia.</p>
                 </div>
-                
-                <!-- Problema 2: El No-Show -->
                 <div class="card">
-                    <div class="card-icon">
-                        <i class="fa-solid fa-user-xmark"></i>
-                    </div>
-                    <h3>Ausentismo (No-Show)</h3>
-                    <p>Pacientes que agendan y no llegan. Perseguir confirmaciones manualmente por WhatsApp es ineficiente y desgastante para tu recepcionista.</p>
+                    <div class="card-icon"><i class="fa-solid fa-user-xmark"></i></div>
+                    <h3>Ausentismo</h3>
+                    <p>Pacientes que agendan y no llegan. Perseguir confirmaciones manualmente es ineficiente.</p>
                 </div>
-                
-                <!-- Problema 3: Descontrol Operativo -->
                 <div class="card">
-                    <div class="card-icon">
-                        <i class="fa-solid fa-clipboard-question"></i>
-                    </div>
+                    <div class="card-icon"><i class="fa-solid fa-clipboard-question"></i></div>
                     <h3>Agenda "A Ciegas"</h3>
-                    <p>Llegas a la clínica sin un reporte claro de tu día. ¿Quién viene? ¿Qué servicio toca? Pierdes tiempo valioso organizando tu jornada cada mañana.</p>
+                    <p>Pierdes tiempo valioso organizando tu jornada cada mañana sin un reporte claro.</p>
                 </div>
             </div>
         </div>
@@ -703,65 +600,41 @@
             <div class="feature-box">
                 <div class="feature-content">
                     <h3>El Ecosistema de Gestión Inteligente</h3>
-                    <p style="margin-bottom: 20px;">No es solo un chatbot. Es una red de 5 sistemas interconectados (Whapi, Google Sheets, Gmail) trabajando en piloto automático.</p>
+                    <p style="margin-bottom: 20px;">No es solo un chatbot. Es una red de 5 sistemas interconectados.</p>
                     
                     <ul class="feature-list">
-                        <!-- Punto 1: El Cerebro -->
                         <li>
                             <i class="fa-solid fa-brain"></i>
-                            <div><strong>1. El Cerebro (Agente IA):</strong> Califica leads y agenda citas 24/7 en WhatsApp, guardando todo en tu base de datos maestra.</div>
+                            <div><strong>1. El Cerebro (Agente IA):</strong> Califica leads y agenda citas 24/7 en WhatsApp.</div>
                         </li>
-                        <!-- Punto 2: Confirmación Inmediata -->
                         <li>
                             <i class="fa-solid fa-envelope-circle-check"></i>
-                            <div><strong>2. Confirmación Inmediata:</strong> 1 segundo después de agendar, el paciente recibe un correo con botones para añadir a Google Calendar.</div>
+                            <div><strong>2. Confirmación Inmediata:</strong> Correo automático al agendar.</div>
                         </li>
-                        <!-- Punto 3: Motor de Recordatorios -->
                         <li>
                             <i class="fa-solid fa-bell"></i>
-                            <div><strong>3. Motor Anti-Ausentismo:</strong> Un sistema automático envía recordatorios diarios con botones dinámicos para Confirmar o Cancelar.</div>
+                            <div><strong>3. Motor Anti-Ausentismo:</strong> Recordatorios automáticos diarios.</div>
                         </li>
-                        <!-- Punto 4: Centro de Procesamiento -->
                         <li>
                             <i class="fa-solid fa-arrows-rotate"></i>
-                            <div><strong>4. Procesamiento Automático:</strong> Si el paciente confirma o cancela, el sistema actualiza tu hoja de cálculo en tiempo real, sin intervención humana.</div>
+                            <div><strong>4. Procesamiento Automático:</strong> Actualización en tiempo real de tu base de datos.</div>
                         </li>
-                        <!-- Punto 5: Reporte al Doctor -->
                         <li>
                             <i class="fa-solid fa-file-medical"></i>
-                            <div><strong>5. Tu Reporte Matutino:</strong> Recibes cada mañana (7:00 AM) un resumen ejecutivo en tu móvil con la agenda depurada del día.</div>
+                            <div><strong>5. Tu Reporte Matutino:</strong> Resumen ejecutivo en tu móvil a las 7:00 AM.</div>
                         </li>
                     </ul>
                 </div>
                 
-                <!-- Visualización del Chat -->
                 <div class="feature-img">
                     <div class="chat-simulation">
-                        <div class="msg msg-in">
-                            Hola, quiero una cita para ortodoncia.
-                            <div class="msg-time">23:45</div>
-                        </div>
-                        <div class="msg msg-out">
-                            ¡Hola! 👋 Claro que sí. ¿Es tu primera vez con nosotros o ya tienes historial en la clínica? (Para agendarte con el especialista correcto).
-                            <div class="msg-time">23:45</div>
-                        </div>
-                        <div class="msg msg-in">
-                            Es primera vez.
-                            <div class="msg-time">23:46</div>
-                        </div>
-                        <div class="msg msg-out">
-                            Perfecto. Tengo espacios mañana a las 9:00 AM o el Jueves a las 4:00 PM. ¿Cuál prefieres reservar? 📅
-                            <div class="msg-time">23:46</div>
-                        </div>
-                        <div style="text-align: center; margin-top: 10px; font-size: 0.8rem; color: #8899a6;">
-                            ...Cita agendada...
-                        </div>
+                        <div class="msg msg-in">Quiero una cita para ortodoncia. <div class="msg-time">23:45</div></div>
+                        <div class="msg msg-out">¡Hola! 👋 Claro. ¿Es primera vez o ya tienes historial? <div class="msg-time">23:45</div></div>
+                        <div class="msg msg-in">Es primera vez. <div class="msg-time">23:46</div></div>
+                        <div class="msg msg-out">Perfecto. Tengo mañana a las 9:00 AM o Jueves a las 4:00 PM. 📅 <div class="msg-time">23:46</div></div>
                         <div style="background: #e9edef; color: #1a1a1a; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 0.85rem;">
-                            <i class="fa-solid fa-check-circle" style="color: green;"></i> <strong>Sistema:</strong> Cita guardada en Google Sheets ID: CITA-001. Correo de confirmación enviado.
+                            <i class="fa-solid fa-check-circle" style="color: green;"></i> <strong>Sistema:</strong> Cita guardada. Correo enviado.
                         </div>
-                    </div>
-                    <div style="text-align: center; margin-top: 15px; color: #fff; font-size: 0.9rem;">
-                        <i class="fa-solid fa-bolt" style="color: var(--accent);"></i> Flujo Real del Ecosistema
                     </div>
                 </div>
             </div>
@@ -773,25 +646,17 @@
         <div class="container">
             <div class="ceo-wrapper">
                 <div class="ceo-image">
-                    <!-- 
-                        IMAGEN ACTUALIZADA CON DISEÑO CIRCULAR
-                    -->
-                    <img src="https://i.ibb.co/60nBxh4Y/88de8eb1-1133-4199-a949-12724d0b25d7.jpg" alt="Sergio M Bompart CEO">
-                    
+                    <img src="https://i.ibb.co/0pjfpQQn/88de8eb1-1133-4199-a949-12724d0b25d7.jpg" alt="Sergio M Bompart CEO">
                     <div class="ceo-badge">
                         <i class="fa-solid fa-chart-line"></i>
-                        <div>
-                            <div style="font-weight: 700; color: var(--primary);">Resultados</div>
-                            <div style="font-size: 0.8rem; color: #666;">Enfoque 100% Medible</div>
-                        </div>
+                        <div><div style="font-weight: 700; color: var(--primary);">Resultados</div><div style="font-size: 0.8rem; color: #666;">Enfoque 100% Medible</div></div>
                     </div>
                 </div>
                 <div class="ceo-info">
                     <i class="fa-solid fa-quote-left quote-icon"></i>
                     <h2 style="margin-bottom: 20px; color: var(--primary);">Detrás de la Tecnología</h2>
                     <div class="ceo-text">
-                        "No somos una agencia de marketing más. Somos ingenieros de automatización obsesionados con la eficiencia clínica. Creé <strong>Marser Automatiza</strong> porque vi cómo excelentes doctores perdían miles de dólares simplemente por no poder contestar el teléfono a tiempo.<br><br>
-                        Mi compromiso es simple: No te vendo un software, te vendo resultados medibles. Yo mismo superviso la implementación de cada agente para asegurar que se adapte perfectamente al flujo de tu clínica."
+                        "No somos una agencia de marketing más. Somos ingenieros de automatización. Creé <strong>Marser</strong> porque vi cómo excelentes doctores perdían miles de dólares por no contestar el teléfono. Mi compromiso: no vendo software, vendo resultados."
                     </div>
                     <div class="ceo-name">Sergio M Bompart</div>
                     <div class="ceo-role">CEO & Fundador</div>
@@ -804,26 +669,20 @@
     <section id="contacto" class="cta-section">
         <div class="container">
             <h2>¿Listo para modernizar tu clínica?</h2>
-            <p>Deja de perder pacientes por no responder a tiempo. Agenda una auditoría gratuita y mira cómo funciona el ecosistema en tiempo real.</p>
-            <!-- BOTÓN CTA FINAL: Agregada clase 'js-open-calendar' -->
+            <p>Agenda una auditoría gratuita y mira el ecosistema en tiempo real.</p>
             <button class="btn btn-primary btn-large js-open-calendar" style="background: var(--white); color: var(--primary);">
                 Agendar Llamada
             </button>
-            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.7;">*Solo trabajamos con 5 clínicas nuevas por mes para garantizar calidad.</p>
+            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.7;">*Solo 5 clínicas nuevas por mes.</p>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
         <div class="container">
-            <div class="footer-logo">MARSER <span>AUTOMATIZA</span></div>
-            <div class="social-links">
-                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
-            </div>
+            <div class="footer-logo">MARSER</div>
             <div class="copyright">
-                &copy; 2025 Marser Automatiza. Todos los derechos reservados.
+                &copy; 2025 Marser. Todos los derechos reservados.
             </div>
         </div>
     </footer>
@@ -832,69 +691,42 @@
     <div class="modal-overlay" id="bookingModal">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="modal-title">Selecciona un horario para tu auditoría</div>
+                <div class="modal-title">Selecciona un horario</div>
                 <button class="close-modal" id="closeModal">&times;</button>
             </div>
             <div class="calendar-container">
-                <!-- 
-                    CALENDARIO INTEGRADO
-                    Enlace configurado: https://calendly.com/sergiomarcano01/30min
-                -->
-                <iframe 
-                    src="https://calendly.com/sergiomarcano01/30min" 
-                    width="100%" 
-                    height="100%" 
-                    frameborder="0" 
-                    title="Agendar Llamada con Sergio">
-                </iframe>
+                <iframe src="https://calendly.com/sergiomarcano01/30min" width="100%" height="100%" frameborder="0" title="Agendar Llamada"></iframe>
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT: Lógica del Modal -->
+    <!-- JAVASCRIPT -->
     <script>
-        // Selección de elementos
         const modal = document.getElementById('bookingModal');
         const openButtons = document.querySelectorAll('.js-open-calendar');
         const closeButton = document.getElementById('closeModal');
 
-        // Función para abrir modal
         function openModal(e) {
-            e.preventDefault(); // Evita que el enlace salte
+            e.preventDefault(); 
             modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Evita scroll de fondo
+            document.body.style.overflow = 'hidden'; 
         }
 
-        // Función para cerrar modal
         function closeModal() {
             modal.classList.remove('active');
-            document.body.style.overflow = 'auto'; // Reactiva scroll
+            document.body.style.overflow = 'auto'; 
         }
 
-        // Asignar evento a TODOS los botones de agendar
-        openButtons.forEach(button => {
-            button.addEventListener('click', openModal);
-        });
-
-        // Cerrar con la X
+        openButtons.forEach(button => button.addEventListener('click', openModal));
         closeButton.addEventListener('click', closeModal);
-
-        // Cerrar haciendo click fuera del contenido (en el fondo oscuro)
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
         
-        // Smooth Scroll para otros enlaces
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                // Solo si NO es un botón de calendario
                 if (!this.classList.contains('js-open-calendar')) {
                     e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if(target) target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
         });
